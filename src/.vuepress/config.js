@@ -120,12 +120,6 @@ module.exports = {
     },
     'vuepress-plugin-table-of-contents',
     [
-      '@vuepress/last-updated',
-      {
-        transformer: (timestamp, lang) => dayjs(timestamp).locale(lang).format('llll')
-      },
-    ],
-    [
       '@vuepress/blog',
       {
         directories: [
