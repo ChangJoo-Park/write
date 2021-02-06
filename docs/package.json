@@ -15,6 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "@vuepress/plugin-blog": "^1.9.4",
+    "dayjs": "^1.10.4",
     "vuepress": "^1.5.3",
     "vuepress-plugin-git-log": "^1.0.1",
     "vuepress-plugin-graysite": "^0.1.0",

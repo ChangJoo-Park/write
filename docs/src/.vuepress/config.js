@@ -1,10 +1,22 @@
 const { description } = require('../../package')
+const dayjs = require('dayjs')
+const AdvancedFormat = require('dayjs/plugin/advancedFormat')
+const localizedFormat = require('dayjs/plugin/localizedFormat')
+dayjs.extend(AdvancedFormat)
+dayjs.extend(localizedFormat)
+require('dayjs/locale/en')
+require('dayjs/locale/ko')
 
 module.exports = {
+  locales: {
+    '/': {
+      lang: 'ko'
+    }
+  },
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Vuepress Docs Boilerplate',
+  title: 'ChangJoo Park\'s Write',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -88,26 +100,32 @@ module.exports = {
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
-    'vuepress-plugin-nprogress',
     'vuepress-plugin-git-log',
     {
       additionalArgs: '--no-merge',
       onlyFirstAndLastCommit: true,
     },
     'vuepress-plugin-table-of-contents',
-    '@vuepress/last-updated',
-    '@vuepress/blog',
-    {
-      directories: [
-        {
-          // Unique ID of current classification
-          id: 'post',
-          // Target directory
-          dirname: '_posts',
-          // Path of the `entry page` (or `list page`)
-          path: '/',
-        },
-      ],
-    },
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp, lang) => dayjs(timestamp).locale(lang).format('llll')
+      },
+    ],
+    [
+      '@vuepress/blog',
+      {
+        directories: [
+          {
+            // Unique ID of current classification
+            id: 'post',
+            // Target directory
+            dirname: '_posts',
+            // Path of the `entry page` (or `list page`)
+            path: '/',
+          },
+        ],
+      },
+    ],
   ]
 }
