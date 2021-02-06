@@ -48,41 +48,36 @@ module.exports = {
           title: 'Vue.js',
           collapsable: true,
           children: [
-            '',
-            'composition-api',
-            'difference-between-ref-and-reactive',
-            'performance-ref-reactive',
-            'watch-watch-effect',
-            'debugging-vue',
-            'devtools'
+            'vue/',
+            'vue/composition-api',
+            'vue/difference-between-ref-and-reactive',
+            'vue/performance-ref-reactive',
+            'vue/watch-watch-effect',
+            'vue/debugging-vue',
+            'vue/devtools',
+            'vue/composition-api-to-three',
+            'vue/prototype-to-global-properties'
           ]
         },
         {
           title: 'Nuxt',
           collapsable: true,
           children: [
-            'nuxt'
+            'nuxt/'
           ]
         },
         {
           title: 'Deno',
           collapsable: true,
-          children: []
+          children: [
+            'deno/'
+          ]
         },
         {
           title: 'Flutter',
           collapsable: true,
-          children: []
-        }
-      ],
-      '/migrations/': [
-        {
-          title: '마이그레이션',
-          collapsable: false,
           children: [
-            '',
-            'composition-api-to-three',
-            'prototype-to-global-properties'
+            'flutter/'
           ]
         }
       ],
@@ -93,7 +88,26 @@ module.exports = {
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
-    '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    'vuepress-plugin-nprogress',
+    'vuepress-plugin-git-log',
+    {
+      additionalArgs: '--no-merge',
+      onlyFirstAndLastCommit: true,
+    },
+    'vuepress-plugin-table-of-contents',
+    '@vuepress/last-updated',
+    '@vuepress/blog',
+    {
+      directories: [
+        {
+          // Unique ID of current classification
+          id: 'post',
+          // Target directory
+          dirname: '_posts',
+          // Path of the `entry page` (or `list page`)
+          path: '/',
+        },
+      ],
+    },
   ]
 }
