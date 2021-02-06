@@ -89,7 +89,10 @@ module.exports = {
           title: 'Deno',
           collapsable: true,
           children: [
-            'deno/'
+            'deno/',
+            'deno/install-deno-macos',
+            'deno/denon',
+            'deno/first-api-server',
           ]
         },
         {
@@ -119,20 +122,5 @@ module.exports = {
       onlyFirstAndLastCommit: true,
     },
     'vuepress-plugin-table-of-contents',
-    [
-      '@vuepress/blog',
-      {
-        directories: [
-          {
-            // Unique ID of current classification
-            id: 'post',
-            // Target directory
-            dirname: '_posts',
-            // Path of the `entry page` (or `list page`)
-            path: '/',
-          },
-        ],
-      },
-    ],
   ]
 }
