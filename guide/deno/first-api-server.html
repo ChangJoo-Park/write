@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>deno로 첫번째 API 서버 만들어보기 | ChangJoo Park&#39;s Write</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/write/assets/css/0.styles.c3a3c9ce.css" as="style"><link rel="preload" href="/write/assets/js/app.88076934.js" as="script"><link rel="preload" href="/write/assets/js/2.62d75d41.js" as="script"><link rel="preload" href="/write/assets/js/16.2e0e0242.js" as="script"><link rel="prefetch" href="/write/assets/js/10.233b49c4.js"><link rel="prefetch" href="/write/assets/js/11.49ce2064.js"><link rel="prefetch" href="/write/assets/js/12.e6b6a916.js"><link rel="prefetch" href="/write/assets/js/13.33bec535.js"><link rel="prefetch" href="/write/assets/js/14.f67c9dbb.js"><link rel="prefetch" href="/write/assets/js/15.eab5b590.js"><link rel="prefetch" href="/write/assets/js/17.778ed87a.js"><link rel="prefetch" href="/write/assets/js/18.50762327.js"><link rel="prefetch" href="/write/assets/js/19.a4fee796.js"><link rel="prefetch" href="/write/assets/js/20.280c1dc4.js"><link rel="prefetch" href="/write/assets/js/21.dffd91a4.js"><link rel="prefetch" href="/write/assets/js/22.34715d61.js"><link rel="prefetch" href="/write/assets/js/23.1132ce43.js"><link rel="prefetch" href="/write/assets/js/24.4251af93.js"><link rel="prefetch" href="/write/assets/js/25.a03a3d4f.js"><link rel="prefetch" href="/write/assets/js/26.ca9a2e28.js"><link rel="prefetch" href="/write/assets/js/27.fd0e6a79.js"><link rel="prefetch" href="/write/assets/js/28.064f18b6.js"><link rel="prefetch" href="/write/assets/js/29.ba6eb953.js"><link rel="prefetch" href="/write/assets/js/3.ee451ee8.js"><link rel="prefetch" href="/write/assets/js/30.7f5a92a6.js"><link rel="prefetch" href="/write/assets/js/31.d9920ec4.js"><link rel="prefetch" href="/write/assets/js/32.4d0eeb72.js"><link rel="prefetch" href="/write/assets/js/33.6ea00d29.js"><link rel="prefetch" href="/write/assets/js/34.ffeb8668.js"><link rel="prefetch" href="/write/assets/js/4.ca167eb3.js"><link rel="prefetch" href="/write/assets/js/5.c895731a.js"><link rel="prefetch" href="/write/assets/js/6.f93936eb.js"><link rel="prefetch" href="/write/assets/js/7.e9c1f144.js"><link rel="prefetch" href="/write/assets/js/8.bd035fcc.js"><link rel="prefetch" href="/write/assets/js/9.00082ab0.js">
+    <link rel="stylesheet" href="/write/assets/css/0.styles.c3a3c9ce.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/write/" class="home-link router-link-active"><!----> <span class="site-name">ChangJoo Park's Write</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/write/guide/" class="nav-link router-link-active">
+  가이드
+</a></div><div class="nav-item"><a href="https://github.com/changjoo-park/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://medium.com/@changjoopark/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Medium
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/write/guide/" class="nav-link router-link-active">
+  가이드
+</a></div><div class="nav-item"><a href="https://github.com/changjoo-park/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://medium.com/@changjoopark/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Medium
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Vue.js</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Nuxt</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Deno</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/write/guide/deno/" aria-current="page" class="sidebar-link">소개</a></li><li><a href="/write/guide/deno/install-deno-macos.html" class="sidebar-link">macOS 에서 Deno 설치하기</a></li><li><a href="/write/guide/deno/denon.html" class="sidebar-link">deno의 nodemon, denon</a></li><li><a href="/write/guide/deno/first-api-server.html" aria-current="page" class="active sidebar-link">deno로 첫번째 API 서버 만들어보기</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/write/guide/deno/first-api-server.html#첫번째-유사-express-앱-만들기" class="sidebar-link">첫번째 유사 express 앱 만들기</a></li></ul></li><li><a href="/write/guide/deno/test-deno-modules.html" class="sidebar-link">deno 모듈 테스트하기</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Flutter</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="deno로-첫번째-api-서버-만들어보기"><a href="#deno로-첫번째-api-서버-만들어보기" class="header-anchor">#</a> deno로 첫번째 API 서버 만들어보기</h1> <p>이전 <a href="/install-deno-macos">install-deno-macos</a> 에서 <code>http</code> 라이브러리의 <code>serve</code> 모듈을 이용해 서버를 만들어보았습니다.</p> <p><code>http</code> 라이브러리는 <code>listenAndServe</code> 라는 모듈을 추가로 제공합니다. 내부적으로는 <code>serve</code>를 이용합니다.
+<code>listenAndServe</code> 의 전체 코드는 다음과 같습니다. 내부적으로 <code>serve</code>를 이용합니다.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">/**
+ * Start an HTTP server with given options and request handler
+ *
+ *     const body = &quot;Hello World\n&quot;;
+ *     const options = { port: 8000 };
+ *     listenAndServe(options, (req) =&gt; {
+ *       req.respond({ body });
+ *     });
+ *
+ * @param options Server configuration
+ * @param handler Request handler
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">listenAndServe</span><span class="token punctuation">(</span>
+  addr<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> HTTPOptions<span class="token punctuation">,</span>
+  <span class="token function-variable function">handler</span><span class="token operator">:</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> server <span class="token operator">=</span> <span class="token function">serve</span><span class="token punctuation">(</span>addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">const</span> request <span class="token keyword">of</span> server<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">handler</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="첫번째-유사-express-앱-만들기"><a href="#첫번째-유사-express-앱-만들기" class="header-anchor">#</a> 첫번째 유사 express 앱 만들기</h2> <p>우선, express의 헬로월드 예제입니다.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> port <span class="token operator">=</span> <span class="token number">3000</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'Hello World!'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>port<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Example app listening at http://localhost:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>port<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>이번에는 deno를 이용해 위와 유사한 역할을 하는 웹서버를 만들어봅니다</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  listenAndServe<span class="token punctuation">,</span>
+  ServerRequest<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;https://deno.land/std/http/server.ts&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> options<span class="token operator">:</span> Deno<span class="token punctuation">.</span>ListenOptions <span class="token operator">=</span> <span class="token punctuation">{</span> port<span class="token operator">:</span> <span class="token number">3000</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">handler</span> <span class="token operator">=</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+  req<span class="token punctuation">.</span><span class="token function">respond</span><span class="token punctuation">(</span><span class="token punctuation">{</span> status<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span> body<span class="token operator">:</span> <span class="token string">&quot;Hello World!&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">listenAndServe</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p><code>listenAndServe</code> 모듈을 이용해서 거의 유사한 웹서버를 만들었습니다. 단, express의 예제는 <code>http://localhost:3000</code> 에만 Hello World! 메시지를 보여주는데 deno로 만든 예제는 모든 요청에 대해 Hello World! 를 리턴하는 것이 다릅니다</p> <p>경로 <code>/</code> 에만 Hello World! 를 보여주려면, <code>req.url</code>이 <code>/</code> 일 때만 처리하도록 변경하면 됩니다.</p> <p>약간 코드를 추가하여 express 처럼 <code>app.get</code> 같은 라우트 등록 메소드를 만들어봅니다</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  listenAndServe<span class="token punctuation">,</span>
+  ServerRequest<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;https://deno.land/std/http/server.ts&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> options<span class="token operator">:</span> Deno<span class="token punctuation">.</span>ListenOptions <span class="token operator">=</span> <span class="token punctuation">{</span> port<span class="token operator">:</span> <span class="token number">8000</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ *  Router 클래스는 `get` 인스턴스 메소드를 이용하여 라우트를 등록하고,
+ * `route` 인스턴스 메소드를 이용하여 등록된 라우트로 요청이 들어오면 처리합니다.
+ * 등록되어 있지 않은 요청을 받으면 NOT FOUND를 리턴합니다.
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Router</span> <span class="token punctuation">{</span>
+  _get<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token comment">/**
+   * GET METHOD 라우트를 등록합니다
+   * @param path
+   * @param handler
+   */</span>
+  <span class="token keyword">get</span><span class="token punctuation">(</span>path<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">handler</span><span class="token operator">:</span> <span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_get<span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">=</span> handler<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">/**
+   * 요청받은 ServerRequest를 처리합니다
+   * @param req {ServerRequest}
+   */</span>
+  <span class="token function">route</span><span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_get<span class="token punctuation">[</span>req<span class="token punctuation">.</span>url<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_get<span class="token punctuation">[</span>req<span class="token punctuation">.</span>url<span class="token punctuation">]</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">respond</span><span class="token punctuation">(</span><span class="token punctuation">{</span> status<span class="token operator">:</span> <span class="token number">404</span><span class="token punctuation">,</span> body<span class="token operator">:</span> <span class="token string">&quot;NOT FOUND&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+router<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>
+  <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+    req<span class="token punctuation">.</span><span class="token function">respond</span><span class="token punctuation">(</span><span class="token punctuation">{</span> status<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span> body<span class="token operator">:</span> <span class="token string">'Hello World!'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">listenAndServe</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>req<span class="token operator">:</span> ServerRequest<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> router<span class="token punctuation">.</span><span class="token function">route</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>실제 운영을 목적으로 하는 애플리케이션에서 이렇게 만들지는 않겠지만 <a href="https://github.com/oakserver/oak" target="_blank" rel="noopener noreferrer">oak<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>나 <a href="https://github.com/syumai/dinatra" target="_blank" rel="noopener noreferrer">dinatra<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 같은 deno를 이용하여 만든 웹 앱 프레임워크들은 외부로부터의 요청을 위와 같이 처리하고 있습니다.</p> <p>URL 파라미터 처리 또는 요청의 body 등을 처리하면 다른 웹 프레임워크들과 조금은 가까워지지만 다른 잘 만들어진 웹 프레임워크를 사용하고, 기여하는 것을 추천합니다.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/write/guide/deno/denon.html" class="prev">
+        deno의 nodemon, denon
+      </a></span> <span class="next"><a href="/write/guide/deno/test-deno-modules.html">
+        deno 모듈 테스트하기
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/write/assets/js/app.88076934.js" defer></script><script src="/write/assets/js/2.62d75d41.js" defer></script><script src="/write/assets/js/16.2e0e0242.js" defer></script>
+  </body>
+</html>
