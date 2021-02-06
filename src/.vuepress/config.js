@@ -93,6 +93,7 @@ module.exports = {
             'deno/install-deno-macos',
             'deno/denon',
             'deno/first-api-server',
+            'deno/test-deno-modules',
           ]
         },
         {
