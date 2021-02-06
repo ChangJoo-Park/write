@@ -1,4 +1,4 @@
-# Deno의 nodemon, denon
+# deno의 nodemon, denon
 
 앞의 [macOS 에서 Deno 설치하기](/install-deno-macos)의 웹서버 예제 실행하기 섹션에서 다음과 같이 server.ts 파일을 실행합니다.
 
