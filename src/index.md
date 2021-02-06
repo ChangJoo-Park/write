@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://changjoo-park.github.io/write/
+heroImage: https://vuepress.vuejs.org/hero.png
 tagline:
 actionText: Quick Start →
 actionLink: /guide/
