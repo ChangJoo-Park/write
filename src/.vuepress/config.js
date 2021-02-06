@@ -8,6 +8,7 @@ require('dayjs/locale/en')
 require('dayjs/locale/ko')
 
 module.exports = {
+  base: '',
   locales: {
     '/': {
       lang: 'ko'
