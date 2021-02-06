@@ -51,8 +51,14 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'Vue 3 마이그레이션',
-        link: '/migrations/'
+        text: 'Github',
+        link: 'https://github.com/changjoo-park/',
+        target:'_blank'
+      },
+      {
+        text: 'Medium',
+        link: 'https://medium.com/@changjoopark/',
+        target:'_blank'
       }
     ],
     sidebar: {
@@ -101,6 +107,12 @@ module.exports = {
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
+    [
+      'sitemap',
+      {
+        hostname: 'https://changjoo-park.github.io/write/guide'
+      },
+    ],
     'vuepress-plugin-git-log',
     {
       additionalArgs: '--no-merge',

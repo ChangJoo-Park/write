@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: 
+heroImage: https://changjoo-park.github.io/write/
+tagline:
 actionText: Quick Start →
 actionLink: /guide/
 features:

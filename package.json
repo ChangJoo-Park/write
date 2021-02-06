@@ -19,6 +19,8 @@
     "vuepress": "^1.5.3",
     "vuepress-plugin-git-log": "^1.0.1",
     "vuepress-plugin-graysite": "^0.1.0",
+    "vuepress-plugin-robots": "^1.0.1",
+    "vuepress-plugin-sitemap": "^2.3.1",
     "vuepress-plugin-table-of-contents": "^1.1.7"
   }
 }
