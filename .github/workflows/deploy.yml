@@ -25,13 +25,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
-    - run : cd ./docs
     - run: yarn
     - run: yarn build
-    - run : cd
     - name: Commit files
       run: |
-        cd ./docs/src/.vuepress/dist
+        cd ./src/.vuepress/dist
         git init
         git config --local user.email "pcjpcj2@gmail.com"
         git config --local user.name "ChangJoo Park"
